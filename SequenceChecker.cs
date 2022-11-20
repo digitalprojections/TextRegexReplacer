@@ -20,51 +20,60 @@ namespace TextRegexReplacer
                 for (int line = 0; line < SharedValues.TxtLines.Count(); line++)
                 {
                     increment++;
-                    
-                    if (SharedValues.StringToBeReplaced != null)
+
+                    if (SharedValues.IntegerSearchPattern != null)
                     {
-                        initialResult = Regex.Match(SharedValues.TxtLines[line], SharedValues.StringToBeReplaced);
+                        initialResult = Regex.Match(SharedValues.TxtLines[line], SharedValues.IntegerSearchPattern);
                     }
                     else
                     {
-                        Console.WriteLine("Invalid pattern: '{0}'", SharedValues.StringToBeReplaced);
+                        Console.WriteLine("Invalid pattern: '{0}'", SharedValues.IntegerSearchPattern);
                         Program.AskRestart();
                         break;
                     }
 
-                    if (initialResult.Success && SharedValues.ReplacementString != null)
+                    if (initialResult.Success && SharedValues.secondaryStringWithinEachPrimaryPatternResult != null)
                     {
-                        finalResult = Regex.Match(initialResult.Value, SharedValues.ReplacementString);
+                        finalResult = Regex.Match(initialResult.Value, SharedValues.secondaryStringWithinEachPrimaryPatternResult);
                     }
                     else
                     {
-                        Console.WriteLine("Invalid pattern: '{0}'", SharedValues.ReplacementString);
+                        Console.WriteLine("Invalid pattern: '{0}'", SharedValues.secondaryStringWithinEachPrimaryPatternResult);
                         Program.AskRestart();
                         break;
                     }
 
                     //Proceed
 
-                    int convertedNumber = int.Parse(finalResult.Value); // this value it the one we need to check for incrementing
-
-                    if (convertedNumber == increment)
+                    bool success = int.TryParse(finalResult.Value, out int convertedNumber); // this value it the one we need to check for incrementing
+                    if (success)
                     {
-                        Console.WriteLine("{0} is the same as {1}", increment, convertedNumber);
-                    }
-                    else
-                    {
-                        chapternumber++;
-                        increment = 1;//reset the increment
                         if (convertedNumber == increment)
                         {
                             Console.WriteLine("{0} is the same as {1}", increment, convertedNumber);
                         }
                         else
                         {
-                            Console.WriteLine("'{0}' NOT SAME AS '{1}' in chapter '{2}'", increment, convertedNumber, chapternumber);
-                            break;
+                            chapternumber++;
+                            increment = 1;//reset the increment
+                            if (convertedNumber == increment)
+                            {
+                                Console.WriteLine("{0} is the same as {1}", increment, convertedNumber);
+                            }
+                            else
+                            {
+                                Console.WriteLine("'{0}' NOT SAME AS '{1}' in chapter '{2}'", increment, convertedNumber, chapternumber);
+                                break;
+                            }
                         }
                     }
+                    else
+                    {
+                        Console.WriteLine("Invalid value: '{0}'", finalResult.Value);
+                        Program.AskRestart();
+                        break;
+                    }
+
                 }
 
             }

@@ -32,7 +32,7 @@ namespace TextReplacer
             Console.WriteLine("Choose a task:");
 
             Console.WriteLine("Text Replacer [0]");
-            Console.WriteLine("Line Sequence Checker [1]");
+            //Console.WriteLine("Line Sequence Checker [1]");
             var choice = Console.ReadLine();
 
             bool success = int.TryParse(choice, out int choicevalue);
@@ -42,12 +42,12 @@ namespace TextReplacer
                 Console.WriteLine(SharedValues.filepathinputrequest);
                 SharedValues.filepath = Console.ReadLine() ?? string.Empty;
 
-                Console.WriteLine(SharedValues.primaryPatternToSearchFor);
-                SharedValues.MainPattern = Console.ReadLine() ?? string.Empty;
-
                 switch (choicevalue)
                 {
                     case 0:
+                        Console.WriteLine(SharedValues.primaryPatternToSearchFor);
+                        SharedValues.MainPattern = Console.ReadLine() ?? string.Empty;
+
                         Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
                         SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
 
@@ -55,14 +55,15 @@ namespace TextReplacer
                         SharedValues.ReplacementString = Console.ReadLine() ?? string.Empty;
                         GetUserInputs(TextReplacer.SaveNewConvertedFile);
                         break;
-                    case 1:
-                        Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
-                        SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
+                    //case 1:
 
-                        Console.WriteLine(SharedValues.finalStringToReplace);
-                        SharedValues.ReplacementString = Console.ReadLine() ?? string.Empty;
-                        GetUserInputs(SequenceChecker.StartSequenceChecking);
-                        break;
+                    //    Console.WriteLine(SharedValues.integerSearchMessage);
+                    //    SharedValues.IntegerSearchPattern = Console.ReadLine() ?? string.Empty;
+                    //    Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
+                    //    SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
+
+                    //    GetUserInputs(SequenceChecker.StartSequenceChecking);
+                    //    break;
                 }
             }
 
