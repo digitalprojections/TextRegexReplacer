@@ -34,18 +34,21 @@ namespace TextReplacer
                 {
                     for (int line = 0; line < SharedValues.TxtLines.Count(); line++)
                     {
-                        foreach (Match searchResult in Regex.Matches(SharedValues.TxtLines[line], SharedValues.MainPattern))
-                        {
+                        Match searchResult = Regex.Match(SharedValues.TxtLines[line], SharedValues.MainPattern);
                             // Console.WriteLine("\n");
 
                             // Console.WriteLine("'{0}' found at index {1}", m.Value, m.Index);
-
+                            if (searchResult.Value.Length>0)
+                            {
                             newValue = SharedValues.TxtLines[line].Replace(searchResult.Value, searchResult.Value.Replace(SharedValues.StringToBeReplaced, SharedValues.ReplacementString));
-
+                            }
+                            else
+                            {
+                                newValue = SharedValues.TxtLines[line];
+                            }
                             // Console.WriteLine("'{0}' is the new value to be inserted", newValue);
 
-                            sw.WriteLine(newValue);
-                        }
+                            sw.WriteLine(newValue);                        
                     }
                 }
                 sw.Close();
