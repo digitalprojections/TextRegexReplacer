@@ -25,26 +25,26 @@ namespace TextReplacer
                 StreamWriter sw = new StreamWriter(
                     Path.Combine(directory, filename.Substring(0, filename.IndexOf(dot))) +
                     underscore + 
-                    DateTime.Now.Ticks.ToString() +
+                    DateTime.Now.Date +
                     path_suffix, 
                     true, 
                     Encoding.UTF8);
 
-                if (SharedValues.TxtLines != null && SharedValues.TxtLines.Length > 0)
+                if (SharedValues.AllTextLines != null && SharedValues.AllTextLines.Length > 0)
                 {
-                    for (int line = 0; line < SharedValues.TxtLines.Count(); line++)
+                    for (int line = 0; line < SharedValues.AllTextLines.Count(); line++)
                     {
-                        Match searchResult = Regex.Match(SharedValues.TxtLines[line], SharedValues.MainPattern);
+                        Match searchResult = Regex.Match(SharedValues.AllTextLines[line], SharedValues.MainPattern);
                             // Console.WriteLine("\n");
 
                             // Console.WriteLine("'{0}' found at index {1}", m.Value, m.Index);
                             if (searchResult.Value.Length>0)
                             {
-                            newValue = SharedValues.TxtLines[line].Replace(searchResult.Value, searchResult.Value.Replace(SharedValues.StringToBeReplaced, SharedValues.ReplacementString));
+                            newValue = SharedValues.AllTextLines[line].Replace(searchResult.Value, searchResult.Value.Replace(SharedValues.StringToBeReplaced, SharedValues.ReplacementString));
                             }
                             else
                             {
-                                newValue = SharedValues.TxtLines[line];
+                                newValue = SharedValues.AllTextLines[line];
                             }
                             // Console.WriteLine("'{0}' is the new value to be inserted", newValue);
 

@@ -12,7 +12,7 @@ namespace TextRegexReplacer
 
         public static string MainPattern { get; set; } = String.Empty;
         public static string StringToBeReplaced { get; set; } = String.Empty;
-        public static string[]? TxtLines { get; set; }
+        public static string[]? AllTextLines { get; set; }
         public static string ReplacementString { get; set; } = String.Empty;
         public static string IntegerSearchPattern { get; set; } = String.Empty;
         public static string filepath { get; set; } = String.Empty;

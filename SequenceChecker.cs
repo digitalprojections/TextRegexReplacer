@@ -15,15 +15,15 @@ namespace TextRegexReplacer
             int increment = 0;
 
 
-            if (SharedValues.TxtLines != null && SharedValues.TxtLines.Length > 0)
+            if (SharedValues.AllTextLines != null && SharedValues.AllTextLines.Length > 0)
             {
-                for (int line = 0; line < SharedValues.TxtLines.Count(); line++)
+                for (int line = 0; line < SharedValues.AllTextLines.Count(); line++)
                 {
                     increment++;
 
                     if (SharedValues.IntegerSearchPattern != null)
                     {
-                        initialResult = Regex.Match(SharedValues.TxtLines[line], SharedValues.IntegerSearchPattern);
+                        initialResult = Regex.Match(SharedValues.AllTextLines[line], SharedValues.IntegerSearchPattern);
                     }
                     else
                     {

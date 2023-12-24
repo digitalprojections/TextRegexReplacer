@@ -32,6 +32,7 @@ namespace TextReplacer
             Console.WriteLine("Choose a task:");
 
             Console.WriteLine("Text Replacer [0]");
+            Console.WriteLine("Transliteration [1]");
             //Console.WriteLine("Line Sequence Checker [1]");
             var choice = Console.ReadLine();
 
@@ -39,7 +40,9 @@ namespace TextReplacer
 
             if (success)
             {
+                //Ask to enter the path
                 Console.WriteLine(SharedValues.filepathinputrequest);
+                //Get the path
                 SharedValues.filepath = Console.ReadLine() ?? string.Empty;
 
                 switch (choicevalue)
@@ -55,20 +58,23 @@ namespace TextReplacer
                         SharedValues.ReplacementString = Console.ReadLine() ?? string.Empty;
                         GetUserInputs(TextReplacer.SaveNewConvertedFile);
                         break;
-                    //case 1:
+                    case 1:
 
-                    //    Console.WriteLine(SharedValues.integerSearchMessage);
-                    //    SharedValues.IntegerSearchPattern = Console.ReadLine() ?? string.Empty;
-                    //    Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
-                    //    SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
+                        //Console.WriteLine(SharedValues.integerSearchMessage);
+                        //SharedValues.IntegerSearchPattern = Console.ReadLine() ?? string.Empty;
+                        //Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
+                        //SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
 
-                    //    GetUserInputs(SequenceChecker.StartSequenceChecking);
-                    //    break;
+                        GetUserInputs(new CyrillicToRoman().ConvertText);
+                        break;
                 }
             }
 
         }
-
+        /// <summary>
+        /// Make sure all good before go on
+        /// </summary>
+        /// <param name="nextAction"></param>
         static void GetUserInputs(Action nextAction)
         {
 
@@ -77,7 +83,7 @@ namespace TextReplacer
             {
                 try
                 {
-                    SharedValues.TxtLines = File.ReadAllLines(SharedValues.filepath);//@"C:\Users\denta\Downloads\Telegram Desktop\quran-uz-k_yoldash-converted.txt"
+                    SharedValues.AllTextLines = File.ReadAllLines(SharedValues.filepath);//@"C:\Users\denta\Downloads\Telegram Desktop\quran-uz-k_yoldash-converted.txt"
                 }
                 catch (Exception fnfx)
                 {
@@ -93,6 +99,7 @@ namespace TextReplacer
                 return;
             }
 
+            //All seems OK. Go on!
             nextAction();
         }
 
