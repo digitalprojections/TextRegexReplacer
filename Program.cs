@@ -33,6 +33,7 @@ namespace TextReplacer
 
             Console.WriteLine("Text Replacer [0]");
             Console.WriteLine("Transliteration [1]");
+            Console.WriteLine("DoubleToSingleQuotationInText [2]");
             //Console.WriteLine("Line Sequence Checker [1]");
             var choice = Console.ReadLine();
 
@@ -59,14 +60,14 @@ namespace TextReplacer
                         GetUserInputs(TextReplacer.SaveNewConvertedFile);
                         break;
                     case 1:
-
-                        //Console.WriteLine(SharedValues.integerSearchMessage);
-                        //SharedValues.IntegerSearchPattern = Console.ReadLine() ?? string.Empty;
-                        //Console.WriteLine(SharedValues.secondaryStringWithinEachPrimaryPatternResult);
-                        //SharedValues.StringToBeReplaced = Console.ReadLine() ?? string.Empty;
-
                         GetUserInputs(new CyrillicToRoman().ConvertText);
                         break;
+                    case 2:
+                        Console.WriteLine("Enter starting index of double quotation mark to replace. Usually, it is 9");
+                        string startIndex = Console.ReadLine() ?? string.Empty;
+                        GetUserInputs(new ReplaceSQLQuotationMark(startIndex).FixQuotationMarks);
+                        break;
+
                 }
             }
 
